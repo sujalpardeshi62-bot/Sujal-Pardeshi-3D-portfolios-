@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sujalpardeshi62-bot.github.io/Sujal-Pardeshi-3D-portfolios-/sitemap.xml
