@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Setup -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sujal Pardeshi | Full Stack Developer | 3D Portfolio</title>
+
+    <!-- SEO Meta -->
+    <meta name="title" content="Sujal Pardeshi | Full Stack Developer Portfolio">
+    <meta name="description" content="Official portfolio of Sujal Pardeshi, a Full Stack Developer and BCA student specializing in JavaScript, Node.js, and modern web technologies. Explore projects, skills, and an interactive 3D portfolio.">
+    <meta name="keywords" content="Sujal Pardeshi, Full Stack Developer, Web Developer Portfolio, JavaScript Developer, Node.js Developer, HTML CSS JavaScript Portfolio, 3D Developer Portfolio, BCA Student Developer India">
+    <meta name="author" content="Sujal Pardeshi">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://your-portfolio-link.com">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0f0f0f">
+
+    <!-- Open Graph (LinkedIn, Facebook, WhatsApp) -->
+    <meta property="og:title" content="Sujal Pardeshi | Full Stack Developer Portfolio">
+    <meta property="og:description" content="Explore Sujal Pardeshi's interactive 3D developer portfolio showcasing web projects, technical skills, and modern development work.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-portfolio-link.com">
+    <meta property="og:image" content="https://your-portfolio-link.com/preview.png">
+    <meta property="og:site_name" content="Sujal Pardeshi Portfolio">
+
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sujal Pardeshi | Full Stack Developer Portfolio">
+    <meta name="twitter:description" content="Interactive 3D developer portfolio showcasing projects, skills, and experience.">
+    <meta name="twitter:image" content="https://your-portfolio-link.com/preview.png">
+
+    <!-- Google Verification (add after Search Console setup) -->
+    <meta name="google-site-verification" content="YOUR_GOOGLE_CODE">
+
+    <!-- Structured Data for Google -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sujal Pardeshi",
+        "url": "https://your-portfolio-link.com",
+        "jobTitle": "Full Stack Developer",
+        "sameAs": [
+            "https://github.com/sujalpardeshi62-bot",
+            "https://linkedin.com/in/sujal-pardeshi-6575bb370"
+        ]
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Locomotive Scroll -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css">
+
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: #e5e5e5; 
+        }
+
+        #main {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        #nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            width: 100%;
+            position: fixed;
+            z-index: 999;
+            padding: 0px 50px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        #nav .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        #nav .nav-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #nav .nav-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #nav h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #000;
+        }
+
+        #nav button {
+            padding: 10px 25px;
+            border-radius: 50px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        #nav button:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- CANVAS (CHARACTER) --- */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1; /* Front */
+            pointer-events: none;
+        }
+
+        /* --- SECTIONS (TEXT) --- */
+        #page, #page1, #page2, #page3, #page4, #page5, #page6, #page7, #page8, #page9, #page10 {
+            position: relative;
+            min-height: 60vh; 
+            width: 100vw;
+            background-color: transparent;
+            z-index: 0; /* Behind canvas */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            padding: 0 5%;
+            overflow: hidden;
+        }
+
+        /* --- HERO LOOP TEXT --- */
+        #loop {
+            display: flex;
+            position: fixed;
+            top: 30%;
+            height: 25%;
+            width: 100%;
+            font-size: 8vw;
+            white-space: nowrap;
+            font-family: 'Space Grotesk', sans-serif;
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        #loop h1 {
+            font-weight: 700;
+            animation: anim 20s linear infinite;
+        }
+
+        #loop h1 span {
+            -webkit-text-stroke: 1.2px #000;
+            color: transparent;
+        }
+
+        @keyframes anim {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- TEXT STYLING --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 90%; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+            margin: 10px 0; 
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5);
+        }
+
+        h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 15px; font-family: 'Space Grotesk', sans-serif; }
+        h3 { font-size: 0.9rem; color: #333; font-weight: 600; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        p { font-size: 1rem; color: #333; line-height: 1.6; margin-bottom: 0; }
+
+        /* =========================================
+           STRICT LEFT / RIGHT POSITIONING
+           ========================================= */
+
+        /* HERO - Left Aligned */
+        #page { justify-content: flex-start; padding-top: 15vh; }
+        #page .content-wrapper { align-self: flex-start; margin-left: 5%; }
+
+        /* ABOUT (Page 1) - Right Aligned */
+        #page1 { align-items: flex-end; padding-right: 5%; }
+        #page1 .glass-card { text-align: right; align-self: flex-end; }
+
+        /* PROGRAMMING (Page 2) - Title Left, Desc Right */
+        #page2 { align-items: flex-start; padding-left: 5%; }
+        #page2 .glass-card:first-child { align-self: flex-start; text-align: left; }
+        #page2 .text2 { align-self: flex-end; text-align: right; margin-right: 5%; }
+
+        /* FRONTEND (Page 3) - Title Right, Desc Left */
+        #page3 { align-items: flex-end; padding-right: 5%; }
+        #page3 .glass-card:first-child { align-self: flex-end; text-align: right; }
+        #page3 .right-text { align-self: flex-start; text-align: left; margin-left: 5%; }
+
+        /* BACKEND (Page 4) - Title Left, Desc Right */
+        #page4 { align-items: flex-start; padding-left: 5%; }
+        #page4 .glass-card:first-child { align-self: flex-start; text-align: left; }
+        #page4 .right-text { align-self: flex-end; text-align: right; margin-right: 5%; }
+
+        /* TOOLS (Page 5) - Title Right, Desc Left */
+        #page5 { align-items: flex-end; padding-right: 5%; }
+        #page5 .glass-card:first-child { align-self: flex-end; text-align: right; }
+        #page5 .right-text { align-self: flex-start; text-align: left; margin-left: 5%; }
+
+        /* EDUCATION (Page 6) - Title Left, Desc Right */
+        #page6 { align-items: flex-start; padding-left: 5%; }
+        #page6 .glass-card:first-child { align-self: flex-start; text-align: left; }
+        #page6 .right-text { align-self: flex-end; text-align: right; margin-right: 5%; }
+
+        /* STRENGTHS (Page 7) - Title Right, Desc Left */
+        #page7 { align-items: flex-end; padding-right: 5%; }
+        #page7 .glass-card:first-child { align-self: flex-end; text-align: right; }
+        #page7 .right-text { align-self: flex-start; text-align: left; margin-left: 5%; }
+
+        /* LANGUAGES (Page 8) - Title Left, Desc Right */
+        #page8 { align-items: flex-start; padding-left: 5%; }
+        #page8 .glass-card:first-child { align-self: flex-start; text-align: left; }
+        #page8 .right-text { align-self: flex-end; text-align: right; margin-right: 5%; }
+
+        /* HOBBIES (Page 9) - Title Right, Desc Left */
+        #page9 { align-items: flex-end; padding-right: 5%; }
+        #page9 .glass-card:first-child { align-self: flex-end; text-align: right; }
+        #page9 .right-text { align-self: flex-start; text-align: left; margin-left: 5%; }
+
+        /* CONTACT (Page 10) - Right Aligned */
+        #page10 { align-items: flex-end; padding-right: 5%; min-height: 80vh; }
+        #page10 .glass-card { text-align: left; align-self: flex-end; }
+
+        /* Scroll Indicator */
+        #page h4 {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 500;
+            z-index: 10; 
+        }
+
+        /* --- SOCIAL ICON STYLES --- */
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            justify-content: flex-start;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: #000;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1) translateY(-5px);
+            background: #333;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div id="nav">
+    <a href="#" class="nav-brand">
+        <img src="favicon.png" alt="Sujal Pardeshi Logo" class="nav-icon">
+        <h3><b>SUJAL</b> PARDESHI</h3>
+    </a>
+    <button>CONTACT ME</button>
+</div>
+
+<!-- LOOP TEXT -->
+<div id="loop">
+    <h1><b>SUJAL</b> PARDESHI IS A <b><i>FULL STACK</i></b> <span>DEVELOPER</span> IN THE <span><i>DIGITAL WORLD.</i></span></h1>
+    <h1><b>SUJAL</b> PARDESHI IS A <b><i>FULL STACK</i></b> <span>DEVELOPER</span> IN THE <span><i>DIGITAL WORLD.</i></span></h1>
+    <h1><b>SUJAL</b> PARDESHI IS A <b><i>FULL STACK</i></b> <span>DEVELOPER</span> IN THE <span><i>DIGITAL WORLD.</i></span></h1>
+</div>
+
+<!-- CANVAS -->
+<canvas></canvas>
+
+<!-- MAIN -->
+<div id="main">
+
+    <!-- HERO -->
+    <div id="page">
+        <div class="content-wrapper glass-card">
+            <h3>FULL STACK DEVELOPER</h3>
+            <h1>Sujal Pardeshi</h1>
+            <p>
+                I am a motivated and detail-oriented BCA Student passionate about Web Development, UI/UX design,
+                and building modern digital experiences. I enjoy creating responsive websites and solving technical
+                problems using creative and practical solutions.
+            </p>
+        </div>
+        <h4>...SCROLL TO EXPLORE</h4>
+    </div>
+
+    <!-- ABOUT -->
+    <div id="page1">
+        <div class="glass-card">
+            <h3>ABOUT ME</h3>
+            <h1>CREATIVE<br>WEB<br>DEVELOPER</h1>
+        </div>
+    </div>
+
+    <!-- PROGRAMMING -->
+    <div id="page2">
+        <div class="glass-card">
+            <h3>PROGRAMMING</h3>
+            <h1>C<br>C++<br>PYTHON<br>JAVASCRIPT</h1>
+        </div>
+        <div class="text2 glass-card">
+            <p>
+                Strong foundation in programming fundamentals and logic building.
+                I use JavaScript and modern technologies to build dynamic web
+                applications and interactive user interfaces.
+            </p>
+        </div>
+    </div>
+
+    <!-- FRONTEND -->
+    <div id="page3">
+        <div class="glass-card">
+            <h3>FRONTEND</h3>
+            <h1>HTML5<br>CSS3<br>RESPONSIVE<br>DESIGN</h1>
+        </div>
+        <div class="right-text glass-card">
+            <p>
+                Focused on building responsive websites using modern layouts,
+                animations, and optimized performance for mobile and desktop users.
+            </p>
+        </div>
+    </div>
+
+    <!-- BACKEND -->
+    <div id="page4">
+        <div class="glass-card">
+            <h3>BACKEND</h3>
+            <h1>NODE JS<br>MONGODB<br>SQL</h1>
+        </div>
+        <div class="right-text glass-card">
+            <p>
+                Experience with backend development concepts including REST APIs,
+                authentication systems, CRUD operations, and database integration.
+            </p>
+        </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div id="page5">
+        <div class="glass-card">
+            <h3>TOOLS</h3>
+            <h1>GITHUB<br>VS CODE<br>AI TOOLS</h1>
+        </div>
+        <div class="right-text glass-card">
+            <p>
+                Comfortable using development tools such as GitHub,
+                VS Code, AI tools, and MS Office for efficient
+                development workflow and project collaboration.
+            </p>
+        </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div id="page6">
+        <div class="glass-card">
+            <h3>EDUCATION</h3>
+            <h1>BCA<br>TILAK<br>VIDYAPEETH</h1>
+        </div>
+        <div class="right-text glass-card">
+            <p>
+                Bachelor of Computer Applications (2023 – 2026)<br>
+                Tilak Maharashtra Vidyapeeth, Pune
+            </p>
+            <p>
+                12th – New High School & Jr. College, Kalyan<br>
+                10th – Chetna English High School, Kalyan
+            </p>
+        </div>
+    </div>
+
+    <!-- STRENGTHS -->
+    <div id="page7">
+        <div class="glass-card">
+            <h3>STRENGTHS</h3>
+            <h1>TEAMWORK<br>FAST<br>LEARNER</h1>
+        </div>
+        <div class="right-text glass-card">
+            <p>
+                • Strong team collaboration and communication skills <br>
+                • Quick learner with adaptive mindset <br>
+                • Ability to build complete projects from idea to execution <br>
+                • Clean and structured coding practices
+            </p>
+        </div>
+    </div>
+
+    <!-- LANGUAGES -->
+    <div id="page8">
+        <div class="glass-card">
+            <h3>LANGUAGES</h3>
+            <h1>ENGLISH<br>HINDI<br>MARATHI</h1>
+        </div>
+        <div class="right-text glass-card">
+            <p>
+                Comfortable communicating and collaborating
+                in multiple languages across diverse teams.
+            </p>
+        </div>
+    </div>
+
+    <!-- HOBBIES -->
+    <div id="page9">
+        <div class="glass-card">
+            <h3>HOBBIES</h3>
+            <h1>GAMING<br>MUSIC<br>SINGING</h1>
+        </div>
+        <div class="right-text glass-card">
+            <p>
+                Gaming helps build strategic thinking and
+                community engagement. Music helps improve
+                focus and creativity during development.
+            </p>
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="page10">
+        <div class="glass-card">
+            <h3>CONTACT</h3>
+            <h1>LET'S<br>WORK<br>TOGETHER</h1>
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/sujal-pardeshi-6575bb370" target="_blank" title="LinkedIn" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/sujalpardeshi62-bot" target="_blank" title="GitHub" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com" target="_blank" title="Instagram" aria-label="Instagram Profile"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com" target="_blank" title="YouTube" aria-label="YouTube Channel"><i class="fab fa-youtube"></i></a>
+                <a href="mailto:sujalpardeshi62@gmail.com" title="Email" aria-label="Send Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+
+<script>
+    // 1. Initialize Locomotive Scroll
+    gsap.registerPlugin(ScrollTrigger);
+
+    const locoScroll = new LocomotiveScroll({
+        el: document.querySelector("#main"),
+        smooth: true,
+    });
+    locoScroll.on("scroll", ScrollTrigger.update);
+
+    ScrollTrigger.scrollerProxy("#main", {
+        scrollTop(value) {
+            return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+        },
+        getBoundingClientRect() {
+            return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+        },
+        pinType: document.querySelector("#main").style.transform ? "transform" : "fixed"
+    });
+    ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+    ScrollTrigger.refresh();
+
+    // 2. Canvas Animation Setup
+    const canvas = document.querySelector("canvas");
+    const context = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    window.addEventListener("resize", function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        render();
+    });
+
+    function files(index) {
+        var data = `./male0001.png
+./male0002.png
+./male0003.png
+./male0004.png
+./male0005.png
+./male0006.png
+./male0007.png
+./male0008.png
+./male0009.png
+./male0010.png
+./male0011.png
+./male0012.png
+./male0013.png
+./male0014.png
+./male0015.png
+./male0016.png
+./male0017.png
+./male0018.png
+./male0019.png
+./male0020.png
+./male0021.png
+./male0022.png
+./male0023.png
+./male0024.png
+./male0025.png
+./male0026.png
+./male0027.png
+./male0028.png
+./male0029.png
+./male0030.png
+./male0031.png
+./male0032.png
+./male0033.png
+./male0034.png
+./male0035.png
+./male0036.png
+./male0037.png
+./male0038.png
+./male0039.png
+./male0040.png
+./male0041.png
+./male0042.png
+./male0043.png
+./male0044.png
+./male0045.png
+./male0046.png
+./male0047.png
+./male0048.png
+./male0049.png
+./male0050.png
+./male0051.png
+./male0052.png
+./male0053.png
+./male0054.png
+./male0055.png
+./male0056.png
+./male0057.png
+./male0058.png
+./male0059.png
+./male0060.png
+./male0061.png
+./male0062.png
+./male0063.png
+./male0064.png
+./male0065.png
+./male0066.png
+./male0067.png
+./male0068.png
+./male0069.png
+./male0070.png
+./male0071.png
+./male0072.png
+./male0073.png
+./male0074.png
+./male0075.png
+./male0076.png
+./male0077.png
+./male0078.png
+./male0079.png
+./male0080.png
+./male0081.png
+./male0082.png
+./male0083.png
+./male0084.png
+./male0085.png
+./male0086.png
+./male0087.png
+./male0088.png
+./male0089.png
+./male0090.png
+./male0091.png
+./male0092.png
+./male0093.png
+./male0094.png
+./male0095.png
+./male0096.png
+./male0097.png
+./male0098.png
+./male0099.png
+./male0100.png
+./male0101.png
+./male0102.png
+./male0103.png
+./male0104.png
+./male0105.png
+./male0106.png
+./male0107.png
+./male0108.png
+./male0109.png
+./male0110.png
+./male0111.png
+./male0112.png
+./male0113.png
+./male0114.png
+./male0115.png
+./male0116.png
+./male0117.png
+./male0118.png
+./male0119.png
+./male0120.png
+./male0121.png
+./male0122.png
+./male0123.png
+./male0124.png
+./male0125.png
+./male0126.png
+./male0127.png
+./male0128.png
+./male0129.png
+./male0130.png
+./male0131.png
+./male0132.png
+./male0133.png
+./male0134.png
+./male0135.png
+./male0136.png
+./male0137.png
+./male0138.png
+./male0139.png
+./male0140.png
+./male0141.png
+./male0142.png
+./male0143.png
+./male0144.png
+./male0145.png
+./male0146.png
+./male0147.png
+./male0148.png
+./male0149.png
+./male0150.png
+./male0151.png
+./male0152.png
+./male0153.png
+./male0154.png
+./male0155.png
+./male0156.png
+./male0157.png
+./male0158.png
+./male0159.png
+./male0160.png
+./male0161.png
+./male0162.png
+./male0163.png
+./male0164.png
+./male0165.png
+./male0166.png
+./male0167.png
+./male0168.png
+./male0169.png
+./male0170.png
+./male0171.png
+./male0172.png
+./male0173.png
+./male0174.png
+./male0175.png
+./male0176.png
+./male0177.png
+./male0178.png
+./male0179.png
+./male0180.png
+./male0181.png
+./male0182.png
+./male0183.png
+./male0184.png
+./male0185.png
+./male0186.png
+./male0187.png
+./male0188.png
+./male0189.png
+./male0190.png
+./male0191.png
+./male0192.png
+./male0193.png
+./male0194.png
+./male0195.png
+./male0196.png
+./male0197.png
+./male0198.png
+./male0199.png
+./male0200.png
+./male0201.png
+./male0202.png
+./male0203.png
+./male0204.png
+./male0205.png
+./male0206.png
+./male0207.png
+./male0208.png
+./male0209.png
+./male0210.png
+./male0211.png
+./male0212.png
+./male0213.png
+./male0214.png
+./male0215.png
+./male0216.png
+./male0217.png
+./male0218.png
+./male0219.png
+./male0220.png
+./male0221.png
+./male0222.png
+./male0223.png
+./male0224.png
+./male0225.png
+./male0226.png
+./male0227.png
+./male0228.png
+./male0229.png
+./male0230.png
+./male0231.png
+./male0232.png
+./male0233.png
+./male0234.png
+./male0235.png
+./male0236.png
+./male0237.png
+./male0238.png
+./male0239.png
+./male0240.png
+./male0241.png
+./male0242.png
+./male0243.png
+./male0244.png
+./male0245.png
+./male0246.png
+./male0247.png
+./male0248.png
+./male0249.png
+./male0250.png
+./male0251.png
+./male0252.png
+./male0253.png
+./male0254.png
+./male0255.png
+./male0256.png
+./male0257.png
+./male0258.png
+./male0259.png
+./male0260.png
+./male0261.png
+./male0262.png
+./male0263.png
+./male0264.png
+./male0265.png
+./male0266.png
+./male0267.png
+./male0268.png
+./male0269.png
+./male0270.png
+./male0271.png
+./male0272.png
+./male0273.png
+./male0274.png
+./male0275.png
+./male0276.png
+./male0277.png
+./male0278.png
+./male0279.png
+./male0280.png
+./male0281.png
+./male0282.png
+./male0283.png
+./male0284.png
+./male0285.png
+./male0286.png
+./male0287.png
+./male0288.png
+./male0289.png
+./male0290.png
+./male0291.png
+./male0292.png
+./male0293.png
+./male0294.png
+./male0295.png
+./male0296.png
+./male0297.png
+./male0298.png
+./male0299.png
+./male0300.png`;
+        
+        const imageList = data.split("\n");
+        if (index >= 0 && index < imageList.length) {
+            return imageList[index].trim();
+        }
+        return "";
+    }
+
+    const frameCount = 300;
+    const images = [];
+    const imageSeq = { frame: 0 };
+
+    // Preload images
+    for (let i = 0; i < frameCount; i++) {
+        const img = new Image();
+        img.src = files(i);
+        images.push(img);
+    }
+
+    // Render function
+    function render() {
+        const img = images[imageSeq.frame];
+        if (!img) return;
+
+        const hRatio = canvas.width / img.width;
+        const vRatio = canvas.height / img.height;
+        const ratio = Math.max(hRatio, vRatio);
+        const centerShift_x = (canvas.width - img.width * ratio) / 2;
+        const centerShift_y = (canvas.height - img.height * ratio) / 2;
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(
+            img,
+            0, 0, img.width, img.height,
+            centerShift_x, centerShift_y,
+            img.width * ratio, img.height * ratio
+        );
+    }
+
+    // 3. SCROLL-CONTROLLED ANIMATION
+    gsap.to(imageSeq, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
+        scrollTrigger: {
+            scrub: 0.5,
+            trigger: "#main",
+            start: "top top",
+            end: "5000px",
+            scroller: "#main",
+        },
+        onUpdate: render
+    });
+
+    // Initial render
+    images[0].onload = render;
+
+    // 4. CARD ENTRANCE ANIMATIONS
+    gsap.utils.toArray(".glass-card").forEach(card => {
+        const style = window.getComputedStyle(card);
+        const isRight = style.alignSelf === 'flex-end' || style.marginLeft === 'auto';
+        
+        gsap.from(card, {
+            x: isRight ? 200 : -200, 
+            opacity: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: card,
+                scroller: "#main",
+                start: "top 80%",
+                end: "top 50%",
+                scrub: 1,
+                toggleActions: "play none none reverse"
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
